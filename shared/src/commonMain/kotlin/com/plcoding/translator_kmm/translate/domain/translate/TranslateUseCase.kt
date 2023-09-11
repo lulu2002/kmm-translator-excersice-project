@@ -5,7 +5,7 @@ import com.plcoding.translator_kmm.core.domain.history.HistoryItem
 import com.plcoding.translator_kmm.core.domain.language.Language
 import com.plcoding.translator_kmm.core.domain.util.Resource
 
-class Translate(
+class TranslateUseCase(
     private val client: TranslateClient,
     private val historyDataSource: HistoryDataSource
 ) {
