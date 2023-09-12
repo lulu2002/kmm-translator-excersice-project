@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">關閉</string>
+    <string name="open">開啟</string>
+    <string name="swap_languages">互換</string>
+</resources>

@@ -43,14 +43,14 @@ class TranslateViewModel(
             is TranslateEvent.ChoosedFromLanguage -> _state.update {
                 it.copy(
                     isChoosingFromLanguage = false,
-                    fromLanguage = UiLanguage.byCode(event.language)
+                    fromLanguage = UiLanguage.byCode(event.language.langCode)
                 )
             }
 
             is TranslateEvent.ChoosedToLanguage -> _state.updateAndGet {
                 it.copy(
                     isChoosingToLanguage = false,
-                    toLanguage = UiLanguage.byCode(event.language)
+                    toLanguage = UiLanguage.byCode(event.language.langCode)
                 )
             }.also { translate(it) }
 

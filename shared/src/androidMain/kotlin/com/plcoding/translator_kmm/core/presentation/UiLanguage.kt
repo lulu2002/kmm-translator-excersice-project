@@ -10,6 +10,9 @@ actual class UiLanguage(
     actual val language: Language
 ) {
 
+    val name: String
+        get() = language.langName
+
     fun toLocale(): Locale? {
         return when (language) {
             Language.ENGLISH -> Locale.ENGLISH
@@ -22,6 +25,7 @@ actual class UiLanguage(
             else -> null
         }
     }
+
 
     actual companion object {
 
