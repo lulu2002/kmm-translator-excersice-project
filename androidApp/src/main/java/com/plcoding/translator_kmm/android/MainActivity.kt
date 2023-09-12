@@ -9,39 +9,35 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.plcoding.translator_kmm.Greeting
+import com.plcoding.translator_kmm.android.core.theme.darkColors
+import com.plcoding.translator_kmm.android.core.theme.lightColors
 
 @Composable
-fun MyApplicationTheme(
+fun TranslatorTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) {
-        darkColors(
-            primary = Color(0xFFBB86FC),
-            primaryVariant = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
-        )
-    } else {
-        lightColors(
-            primary = Color(0xFF6200EE),
-            primaryVariant = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
-        )
-    }
+    val colors = if (darkTheme) darkColors else lightColors
+    val sfProText = FontFamily(
+        Font(R.font.sf_pro_text_regular, weight = FontWeight.Normal),
+        Font(R.font.sf_pro_text_medium, weight = FontWeight.Medium),
+        Font(R.font.sf_pro_text_bold, weight = FontWeight.Bold),
+    )
     val typography = Typography(
-        body1 = TextStyle(
-            fontFamily = FontFamily.Default,
-            fontWeight = FontWeight.Normal,
-            fontSize = 16.sp
-        )
+        h1 = sfProText.createHeading(30.sp),
+        h2 = sfProText.createHeading(24.sp),
+        h3 = sfProText.createHeading(20.sp),
+        body1 = sfProText.createBodyText(14.sp),
+        body2 = sfProText.createBodyText(12.sp)
     )
     val shapes = Shapes(
         small = RoundedCornerShape(4.dp),
@@ -57,31 +53,36 @@ fun MyApplicationTheme(
     )
 }
 
+private fun FontFamily.createHeading(size: TextUnit) = TextStyle(
+    fontFamily = this,
+    fontWeight = FontWeight.Bold,
+    fontSize = size
+)
+
+private fun FontFamily.createBodyText(size: TextUnit) = TextStyle(
+    fontFamily = this,
+    fontWeight = FontWeight.Normal,
+    fontSize = size
+)
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApplicationTheme {
+            TranslatorTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting(Greeting().greeting())
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(text: String) {
-    Text(text = text)
-}
-
 @Preview
 @Composable
 fun DefaultPreview() {
-    MyApplicationTheme {
-        Greeting("Hello, Android!")
+    TranslatorTheme {
     }
 }
